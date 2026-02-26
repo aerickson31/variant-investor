@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VARIANT — Investor Narrative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f0e8;
+    --accent: #c8440a;
+    --accent2: #1a4a6b;
+    --muted: #6b6560;
+    --rule: rgba(10,10,10,0.12);
+    --warm-white: #faf7f2;
+    --atom-blue: #0d2f4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-mark {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 64px 80px 64px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 0.97;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 2vw, 22px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height: 1.5;
+    max-width: 460px;
+  }
+
+  .hero-statement {
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 440px;
+    color: #3a3530;
+    margin-bottom: 52px;
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 14px 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #a33508; transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover { color: var(--ink); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reactor-diagram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .reactor-svg {
+    width: 480px;
+    height: 480px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease 0.4s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  .orbit-1 { animation: spin 12s linear infinite; transform-origin: 240px 240px; }
+  .orbit-2 { animation: spin 18s linear infinite reverse; transform-origin: 240px 240px; }
+  .orbit-3 { animation: spin 8s linear infinite; transform-origin: 240px 240px; }
+  .pulse-core { animation: pulse 3s ease-in-out infinite; transform-origin: 240px 240px; }
+  .flow-particles { animation: flow 4s ease-in-out infinite; }
+
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+  @keyframes flow {
+    0%, 100% { stroke-dashoffset: 0; }
+    50% { stroke-dashoffset: -40; }
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: 60px;
+    right: -20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.04);
+    letter-spacing: -0.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--atom-blue);
+    color: white;
+    padding: 40px 64px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-item {
+    padding: 0 32px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .stat-item:first-child { padding-left: 0; }
+  .stat-item:last-child { border-right: none; }
+  .stat-item.visible { opacity: 1; transform: translateY(0); }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1;
+    color: #e8d5c0;
+    margin-bottom: 6px;
+  }
+
+  .stat-unit {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 120px 64px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 48px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* TWO-COL LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .two-col-wide {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* PROSE */
+  .prose p {
+    font-size: 16px;
+    line-height: 1.82;
+    color: #2a2520;
+    margin-bottom: 22px;
+    font-weight: 400;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* CALLOUT BOX */
+  .callout-box {
+    background: var(--atom-blue);
+    color: white;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .callout-box::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+  }
+
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .callout-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* INLINE ALERT BOX */
+  .alert-box {
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    background: rgba(200,68,10,0.04);
+    margin: 28px 0;
+  }
+
+  .alert-box p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #3a3530;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .alert-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* PILLARS */
+  .pillars {
+    background: var(--warm-white);
+    padding: 120px 64px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pillars-inner { max-width: 1400px; margin: 0 auto; }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+
+  .pillar {
+    background: white;
+    padding: 48px 40px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+
+  .pillar:hover { border-top-color: var(--accent); transform: translateY(-4px); }
+
+  .pillar-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.06);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .pillar-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .pillar-tag {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+  }
+
+  /* STRATEGY STEPS */
+  .strategy-steps { display: flex; flex-direction: column; }
+
+  .step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .step.visible { opacity: 1; transform: translateX(0); }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.1);
+    line-height: 1;
+    padding-top: 4px;
+  }
+
+  .step-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .step-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .step-meta {
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--accent2);
+    text-transform: uppercase;
+  }
+
+  /* SRS FEATURE */
+  .srs-feature {
+    background: var(--atom-blue);
+    color: white;
+    padding: 120px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .srs-feature::before {
+    content: 'SRS';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 320px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .srs-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .srs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .srs-label::after { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+  .srs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.8vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 32px;
+  }
+
+  .srs-title em { font-style: italic; color: #e8d5c0; }
+
+  .srs-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .srs-advantages { display: flex; flex-direction: column; }
+
+  .srs-adv {
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .srs-adv-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+
+  .srs-adv-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .srs-adv-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+  }
+
+  .srs-number-callout {
+    margin-top: 40px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 32px;
+  }
+
+  .srs-big-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: #e8d5c0;
+    line-height: 1;
+  }
+
+  .srs-big-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+
+  .srs-big-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 12px;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  /* TRITIUM BOX */
+  .tritium-box {
+    margin-top: 32px;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 28px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .tritium-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .tritium-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 0;
+  }
+
+  .tritium-item {}
+
+  .tritium-item-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 4px;
+  }
+
+  .tritium-item-value {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  /* TIMELINE */
+  .timeline-section {
+    background: var(--warm-white);
+    padding: 120px 64px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .timeline-inner { max-width: 1400px; margin: 0 auto; }
+
+  .timeline {
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 0 0 56px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--warm-white);
+  }
+
+  .timeline-date { padding-left: 32px; }
+  .tl-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .tl-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .tl-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+  }
+
+  .tl-body {
+    font-size: 14px;
+    line-height: 1.78;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .tl-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .tl-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+  }
+
+  .tl-tag.hot { border-color: var(--accent); color: var(--accent); }
+  .tl-tag.blue { border-color: var(--accent2); color: var(--accent2); }
+
+  /* PROOF GRID */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+
+  .proof-item {
+    background: white;
+    padding: 40px 36px;
+    border-top: 2px solid var(--rule);
+    transition: border-color 0.3s;
+  }
+
+  .proof-item:hover { border-top-color: var(--accent2); }
+
+  .proof-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .proof-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .proof-body {
+    font-size: 13px;
+    line-height: 1.72;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* RISK TABLE */
+  .risk-section {
+    background: var(--warm-white);
+    padding: 120px 64px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .risk-inner { max-width: 1400px; margin: 0 auto; }
+
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 56px;
+  }
+
+  .risk-row {
+    display: grid;
+    grid-template-columns: 260px 1fr 1fr;
+    gap: 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .risk-row.visible { opacity: 1; transform: translateY(0); }
+
+  .risk-row-header {
+    display: grid;
+    grid-template-columns: 260px 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .risk-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .risk-name {
+    font-family: 'Archivo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .risk-severity {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .sev-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .sev-high .sev-dot { background: #c8440a; }
+  .sev-med .sev-dot { background: #b08030; }
+  .sev-low .sev-dot { background: #3a7a50; }
+  .sev-high { color: #c8440a; }
+  .sev-med { color: #b08030; }
+  .sev-low { color: #3a7a50; }
+
+  .risk-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .risk-retire {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #2a2520;
+    font-weight: 400;
+  }
+
+  /* MARKETS */
+  .markets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    margin-top: 56px;
+  }
+
+  .market-card {
+    background: white;
+    padding: 44px 40px;
+    border-top: 3px solid var(--rule);
+    transition: border-color 0.3s;
+  }
+
+  .market-card.primary { border-top-color: var(--accent); }
+  .market-card:hover { border-top-color: var(--accent); }
+
+  .market-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .market-badge.primary-badge {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .market-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .market-body {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+
+  .market-fit {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* WHAT WE ARE NOT */
+  .not-section {
+    background: var(--ink);
+    color: white;
+    padding: 100px 64px;
+  }
+
+  .not-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .not-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .not-label::after { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+  .not-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 28px;
+  }
+
+  .not-title em { font-style: italic; color: #e8d5c0; }
+
+  .not-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+
+  .not-list { list-style: none; display: flex; flex-direction: column; }
+
+  .not-item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    align-items: start;
+  }
+
+  .not-x {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+    margin-top: 2px;
+  }
+
+  .not-item-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+  }
+
+  .not-item-text strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+
+  /* FINANCIALS */
+  .fin-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .fin-table tr { border-bottom: 1px solid var(--rule); }
+
+  .fin-table td {
+    padding: 14px 0;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .fin-table td:last-child {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .fin-table tr.total td {
+    color: var(--ink);
+    font-weight: 600;
+    border-top: 2px solid var(--ink);
+    border-bottom: none;
+  }
+
+  .fin-table tr.total td:last-child { color: var(--accent); font-size: 16px; }
+
+  .scenario-cards { display: flex; flex-direction: column; gap: 14px; }
+
+  .scenario-card {
+    padding: 28px;
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .scenario-card:hover { border-color: var(--accent); }
+  .scenario-card.featured {
+    background: var(--atom-blue);
+    color: white;
+    border-color: var(--atom-blue);
+  }
+
+  .sc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .scenario-card.featured .sc-label { color: rgba(255,255,255,0.4); }
+
+  .sc-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .scenario-card.featured .sc-value { color: #e8d5c0; }
+
+  .sc-logic {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--accent2);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .scenario-card.featured .sc-logic { color: rgba(200,210,230,0.6); }
+
+  .sc-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .scenario-card.featured .sc-desc { color: rgba(255,255,255,0.5); }
+
+  /* ASK */
+  .ask-section {
+    background: var(--ink);
+    color: white;
+    padding: 120px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ask-section::after {
+    content: '$';
+    position: absolute;
+    right: 40px;
+    bottom: -40px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 400px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.02);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .ask-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ask-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ask-label::after { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+  .ask-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 28px;
+  }
+
+  .ask-title em { font-style: italic; color: #e8d5c0; }
+
+  .ask-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 96px;
+    font-weight: 300;
+    color: #e8d5c0;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .ask-amount-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 32px;
+  }
+
+  .ask-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+
+  .use-of-funds { display: flex; flex-direction: column; }
+
+  .fund-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    align-items: center;
+  }
+
+  .fund-name { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 400; }
+  .fund-amount { font-family: 'DM Mono', monospace; font-size: 13px; color: #e8d5c0; }
+
+  .fund-bar-wrap {
+    margin-top: 4px;
+    height: 2px;
+    background: rgba(255,255,255,0.06);
+    grid-column: 1/-1;
+  }
+
+  .fund-bar { height: 100%; background: var(--accent); transition: width 1s ease; }
+
+  /* MILESTONES */
+  .milestone-list { display: flex; flex-direction: column; gap: 14px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .milestone-item { display: flex; gap: 16px; align-items: start; }
+
+  .m-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+
+  .m-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; font-weight: 400; }
+  .m-text strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: white;
+    padding: 48px 64px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-mark { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; font-style: italic; }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+  .footer-disclaimer { font-size: 11px; color: rgba(255,255,255,0.2); max-width: 400px; line-height: 1.6; text-align: right; font-weight: 400; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 24px 60px; }
+    section, .pillars, .srs-feature, .timeline-section, .risk-section, .not-section, .ask-section { padding: 80px 24px; }
+    .two-col, .two-col-wide, .srs-inner, .not-inner, .ask-inner { grid-template-columns: 1fr; gap: 40px; }
+    .pillars-grid, .proof-grid, .markets-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: 1fr 1fr; padding: 40px 24px; }
+    .stat-item { padding: 20px 16px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .timeline-item, .risk-row, .risk-row-header { grid-template-columns: 1fr; gap: 12px; }
+    footer { padding: 40px 24px; }
+    .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-disclaimer { text-align: center; }
+    .tritium-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-mark">VARIANT — SMR</div>
+  <ul class="nav-links">
+    <li><a href="#opportunity">Opportunity</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#srs">Savannah River</a></li>
+    <li><a href="#demo">Demo Plan</a></li>
+    <li><a href="#risks">Risks</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#ask">The Ask</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Investor Narrative — 2025</div>
+    <h1 class="hero-title">The<br><em>Enrichment-</em><br><em>Independent</em><br>Reactor</h1>
+    <p class="hero-subtitle">A heavy-water moderated SMR designed to operate on natural uranium, eliminating reliance on commercial enrichment for baseline fuel supply.</p>
+    <p class="hero-statement">
+      Every other SMR in development depends on enriched uranium — a supply chain with structural geopolitical exposure. VARIANT is designed from first principles around a different fuel basis. The physics is 60 years proven. The integration is new.
+    </p>
+    <div class="hero-cta">
+      <a href="#opportunity" class="btn-primary">Read the Narrative</a>
+      <a href="#ask" class="btn-ghost">Jump to the Ask →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="reactor-diagram">
+      <svg class="reactor-svg" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="240" cy="240" r="220" stroke="rgba(10,10,10,0.06)" stroke-width="1"/>
+        <circle cx="240" cy="240" r="190" stroke="rgba(10,10,10,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
+        <ellipse cx="240" cy="240" rx="140" ry="90" fill="rgba(26,74,107,0.06)" stroke="rgba(26,74,107,0.2)" stroke-width="1.5"/>
+        <g opacity="0.6">
+          <line x1="120" y1="220" x2="360" y2="220" stroke="rgba(26,74,107,0.3)" stroke-width="1"/>
+          <line x1="115" y1="240" x2="365" y2="240" stroke="rgba(26,74,107,0.4)" stroke-width="2"/>
+          <line x1="120" y1="260" x2="360" y2="260" stroke="rgba(26,74,107,0.3)" stroke-width="1"/>
+          <line x1="130" y1="200" x2="350" y2="200" stroke="rgba(26,74,107,0.2)" stroke-width="1"/>
+          <line x1="130" y1="280" x2="350" y2="280" stroke="rgba(26,74,107,0.2)" stroke-width="1"/>
+        </g>
+        <g fill="rgba(200,68,10,0.7)">
+          <rect x="145" y="234" width="18" height="12" rx="2"/>
+          <rect x="172" y="234" width="18" height="12" rx="2"/>
+          <rect x="199" y="234" width="18" height="12" rx="2"/>
+          <rect x="226" y="234" width="18" height="12" rx="2"/>
+          <rect x="253" y="234" width="18" height="12" rx="2"/>
+          <rect x="280" y="234" width="18" height="12" rx="2"/>
+          <rect x="307" y="234" width="18" height="12" rx="2"/>
+        </g>
+        <g class="flow-particles" stroke="rgba(200,68,10,0.5)" stroke-width="1.5" stroke-dasharray="8 6">
+          <line x1="370" y1="240" x2="420" y2="240"/>
+          <line x1="115" y1="240" x2="65" y2="240"/>
+        </g>
+        <polygon points="420,236 428,240 420,244" fill="rgba(200,68,10,0.5)"/>
+        <polygon points="65,236 57,240 65,244" fill="rgba(200,68,10,0.5)"/>
+        <text x="430" y="237" font-family="monospace" font-size="9" fill="rgba(200,68,10,0.7)" letter-spacing="1">He</text>
+        <text x="36" y="237" font-family="monospace" font-size="9" fill="rgba(200,68,10,0.7)" letter-spacing="1">He</text>
+        <text x="240" y="186" font-family="monospace" font-size="9" fill="rgba(26,74,107,0.5)" text-anchor="middle" letter-spacing="1">D₂O MODERATOR</text>
+        <g class="orbit-1">
+          <circle cx="240" cy="60" r="5" fill="rgba(200,68,10,0.6)"/>
+          <circle cx="240" cy="420" r="5" fill="rgba(200,68,10,0.6)"/>
+        </g>
+        <g class="orbit-2">
+          <circle cx="60" cy="240" r="3.5" fill="rgba(26,74,107,0.5)"/>
+          <circle cx="420" cy="240" r="3.5" fill="rgba(26,74,107,0.5)"/>
+          <ellipse cx="240" cy="240" rx="180" ry="60" stroke="rgba(26,74,107,0.08)" stroke-width="1" transform="rotate(-30 240 240)"/>
+        </g>
+        <g class="orbit-3">
+          <circle cx="390" cy="130" r="4" fill="rgba(200,68,10,0.4)"/>
+          <ellipse cx="240" cy="240" rx="160" ry="40" stroke="rgba(200,68,10,0.06)" stroke-width="1" transform="rotate(20 240 240)"/>
+        </g>
+        <g class="pulse-core">
+          <circle cx="240" cy="240" r="28" fill="rgba(200,68,10,0.08)" stroke="rgba(200,68,10,0.2)" stroke-width="1"/>
+          <circle cx="240" cy="240" r="14" fill="rgba(200,68,10,0.15)"/>
+        </g>
+        <line x1="240" y1="170" x2="240" y2="155" stroke="rgba(10,10,10,0.1)" stroke-width="1"/>
+        <text x="240" y="150" font-family="monospace" font-size="8" fill="rgba(10,10,10,0.3)" text-anchor="middle">PRESSURE TUBE ARRAY</text>
+        <line x1="370" y1="240" x2="390" y2="210" stroke="rgba(10,10,10,0.1)" stroke-width="1"/>
+        <text x="392" y="207" font-family="monospace" font-size="8" fill="rgba(10,10,10,0.3)">HELIUM LOOP</text>
+        <rect x="180" y="296" width="120" height="22" rx="2" fill="rgba(26,74,107,0.08)" stroke="rgba(26,74,107,0.15)" stroke-width="1"/>
+        <text x="240" y="311" font-family="monospace" font-size="8" fill="rgba(26,74,107,0.5)" text-anchor="middle" letter-spacing="1">0.2 MPa CALANDRIA</text>
+      </svg>
+    </div>
+    <div class="hero-bg-text">V</div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">200</div>
+    <div class="stat-unit">MWth</div>
+    <div class="stat-label">Commercial Thermal Power</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0.7<span style="font-size:28px">%</span></div>
+    <div class="stat-unit">U-235</div>
+    <div class="stat-label">Minimum Fuel Grade</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">380</div>
+    <div class="stat-unit">°C</div>
+    <div class="stat-label">Helium Outlet Temperature</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">&lt;$100</div>
+    <div class="stat-unit">M</div>
+    <div class="stat-label">Demo Unit Total Capital</div>
+  </div>
+</div>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity">
+  <div class="section-label">The Opportunity</div>
+  <h2 class="section-title">The fuel supply<br><em>constraint</em></h2>
+  <div class="two-col">
+    <div class="prose fade-up">
+      <p>
+        Every LWR-based SMR entering the market — NuScale, BWRX-300, Holtec, Rolls-Royce — requires 
+        uranium enriched to 3–5% U-235. That enrichment must be purchased commercially from one of 
+        a small number of qualified suppliers. As of 2024, roughly 44% of global enrichment capacity 
+        sits in Russia. Western alternatives exist, but capacity is constrained and qualification 
+        timelines are long.
+      </p>
+      <p>
+        We are not claiming enrichment is the only bottleneck. Conversion capacity, qualified fuel 
+        fabricators, and regulatory approval of new fuel designs are all real constraints. The point 
+        is more specific: enrichment is the constraint with the deepest geopolitical exposure and the 
+        longest lead time to replace. At fleet scale — dozens of LWR SMRs operating — it becomes 
+        structural.
+      </p>
+      <p>
+        HALEU (high-assay LEU at 5–20%) is the acute near-term chokepoint for some advanced designs. 
+        Standard 3–5% LEU is a lower-grade concern today, but concentration of production capacity 
+        in hostile-adjacent jurisdictions is a planning risk that utilities, governments, and 
+        sophisticated investors are actively pricing.
+      </p>
+      <p>
+        VARIANT's design basis eliminates enrichment dependency entirely for baseline operation. 
+        This is not a marginal improvement — it is a structurally different position in the fuel 
+        cycle. That position becomes more valuable as geopolitical friction increases and as 
+        domestic fuel sovereignty becomes an explicit procurement criterion.
+      </p>
+      <div class="alert-box">
+        <div class="alert-label">What We Are Claiming</div>
+        <p>A heavy-water moderated SMR with a credible path to NRC licensing, natural uranium fuel 
+        operation, and a first-of-kind demo at a DOE facility within five years. Not magic — a specific, 
+        fundable technical program with identified advantages and acknowledged risks.</p>
+      </div>
+    </div>
+    <div class="fade-up" style="transition-delay:0.1s">
+      <div class="callout-box">
+        <div class="callout-text">
+          "Reducing dependence on foreign sources of enriched uranium is a national security 
+          imperative, not merely a supply chain optimization."
+        </div>
+        <div class="callout-source">— U.S. Department of Energy, Uranium Reserve Program Assessment, 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<div class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <div class="section-label">Why VARIANT</div>
+    <h2 class="section-title">Three structural<br><em>advantages</em></h2>
+    <div class="pillars-grid">
+      <div class="pillar fade-up">
+        <div class="pillar-number">01</div>
+        <div class="pillar-title">No Enrichment Required</div>
+        <p class="pillar-body">
+          Heavy-water moderation provides enough neutron economy to sustain criticality on natural 
+          uranium at 0.7% U-235. Deuterium absorbs 1/635th of the neutrons hydrogen would capture, 
+          preserving enough flux for fuel that LWRs cannot use. This is not a design aspiration — 
+          it is the operating basis of every CANDU reactor built since the 1960s. VARIANT inherits 
+          that physics and applies it in a new coolant architecture.
+        </p>
+        <div class="pillar-tag">Fuel Sovereignty</div>
+      </div>
+      <div class="pillar fade-up" style="transition-delay:0.1s">
+        <div class="pillar-number">02</div>
+        <div class="pillar-title">Conservative by Design</div>
+        <p class="pillar-body">
+          At 380°C helium outlet — below the threshold requiring exotic pressure tube alloys — 
+          VARIANT uses standard Zr-2.5Nb tubes, 316L stainless heat exchangers, and natural UO₂ 
+          fuel in a CANDU-heritage bundle geometry. No new alloy development program. No PCHE 
+          nuclear qualification on the critical path. Every component selection is deliberately 
+          conservative to reduce licensing novelty and de-risk FOAK construction.
+        </p>
+        <div class="pillar-tag">Low Tech Risk</div>
+      </div>
+      <div class="pillar fade-up" style="transition-delay:0.2s">
+        <div class="pillar-number">03</div>
+        <div class="pillar-title">Proven Components, New Integration</div>
+        <p class="pillar-body">
+          Heavy-water moderation has 60 years of commercial operating history across 30+ reactors. 
+          Helium-cooled reactors have NRC licensing precedent in the U.S. Historical gas-cooled 
+          HW designs (KS-150, Niederaichbach) operated in the 1970s; VARIANT's helium choice 
+          specifically addresses the CO₂ corrosion issues that limited those designs. 
+          Precedent reduces novelty risk — but we treat this as first-of-kind under today's 
+          NRC review expectations and have budgeted accordingly.
+        </p>
+        <div class="pillar-tag">Licensable</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SAFETY -->
+<section id="safety">
+  <div class="section-label">Safety Architecture</div>
+  <h2 class="section-title">Three layers,<br><em>each passive</em></h2>
+  <div class="two-col-wide">
+    <div class="prose fade-up">
+      <p>
+        VARIANT's safety case rests on three distinct functions, each with a passive mechanism 
+        that requires no operator action, no external power, and no active components during 
+        the first several hours of any design-basis event. The demo program is specifically 
+        structured to validate all three experimentally.
+      </p>
+      <p>
+        We avoid the phrase "inherent safety" in regulatory contexts. The correct framing for 
+        NRC reviewers is: passive shutdown with validated reactivity coefficients, passive 
+        decay heat removal with calculated time constants, and a confinement strategy with 
+        a bounded source term from low-pressure inert-coolant operation.
+      </p>
+    </div>
+    <div class="fade-up" style="transition-delay:0.1s">
+      <div class="step" style="opacity:1;transform:none;padding-top:0;">
+        <div class="step-num" style="color:var(--accent);opacity:0.7;">1</div>
+        <div>
+          <div class="step-title">Reactivity Termination</div>
+          <div class="step-body">Dual independent shutdown systems: gravity-drop shutoff rods (primary) and moderator dump to below-grade tank (secondary). Moderator dump is fail-safe by gravity — no power, no pumps. Once the D₂O is drained, the core is deeply subcritical at any fuel loading. Restart requires deliberate re-fill, which is an operational control, not a safety concern. Restart time after dump is hours, which is a grid reliability tradeoff acknowledged in the design.</div>
+        </div>
+      </div>
+      <div class="step" style="opacity:1;transform:none;">
+        <div class="step-num" style="color:var(--accent);opacity:0.7;">2</div>
+        <div>
+          <div class="step-title">Decay Heat Removal</div>
+          <div class="step-body">The D₂O moderator mass acts as a primary heat sink following scram. Natural convection loops carry heat from the calandria to external air coolers with no pumps. Time-to-boil calculations (to be validated by demo) indicate several hours of passive margin before any fuel temperature limit is approached. Secondary passive path via shell-and-tube HX natural draft available. This function is the primary objective of the demo passive heat removal test.</div>
+        </div>
+      </div>
+      <div class="step" style="opacity:1;transform:none;border-bottom:none;">
+        <div class="step-num" style="color:var(--accent);opacity:0.7;">3</div>
+        <div>
+          <div class="step-title">Confinement Philosophy</div>
+          <div class="step-body">Helium operating at 3–4 MPa (vs. PWR primary at ~15 MPa) dramatically reduces the stored energy driving any loss-of-coolant event. An inert coolant produces no hydrogen, no steam explosion, no chemical reaction with fuel cladding. Confinement rather than a large leak-tight containment is the design basis, pending formal source term analysis. Demo will characterize fission product release under controlled fault conditions to bound the confinement design for the commercial unit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets" style="background:var(--warm-white); max-width:100%; padding:120px 64px; border-top:1px solid var(--rule);">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div class="section-label">Target Markets</div>
+    <h2 class="section-title">Two primary markets<br>for the <em>first 10 units</em></h2>
+    <div class="prose fade-up" style="max-width:680px; margin-bottom:0;">
+      <p>
+        We are not pitching a reactor to everyone. The first commercial units are targeted at 
+        two markets where VARIANT's specific combination of attributes — natural uranium fuel, 
+        380°C process heat, small footprint, DOE/NRC-credentialed design — creates a 
+        differentiated value proposition. We describe the fit explicitly, including why these 
+        buyers would choose VARIANT over a large reactor PPA or a competing SMR.
+      </p>
+    </div>
+    <div class="markets-grid">
+      <div class="market-card primary fade-up">
+        <div class="market-badge primary-badge">Primary Market 1</div>
+        <div class="market-title">Defense &amp; Sovereign Resilient Power</div>
+        <p class="market-body">
+          DOD installations and federal facilities operating in energy-constrained environments 
+          require assured, on-site power that cannot be disrupted by grid events or fuel supply 
+          interruption. VARIANT's natural uranium basis means the fuel supply chain has zero 
+          dependence on foreign enrichment capacity — a direct national security benefit DOD can 
+          quantify. At 65–70 MWe, a single unit can serve a mid-size installation. The small 
+          footprint, low operating pressure, and passive safety profile simplify siting on 
+          existing federal land. The SRS location itself as the demo site creates a direct 
+          DOE-to-DOD deployment pathway.
+        </p>
+        <div class="market-fit">VARIANT fit: Natural U fuel = zero enrichment exposure &bull; Small footprint &bull; Passive safety = siting flexibility &bull; DOE relationship = federal procurement pathway</div>
+      </div>
+      <div class="market-card primary fade-up" style="transition-delay:0.1s">
+        <div class="market-badge primary-badge">Primary Market 2</div>
+        <div class="market-title">Industrial Process Heat &amp; Cogeneration</div>
+        <p class="market-body">
+          At 380°C helium outlet, VARIANT produces steam conditions that every LWR SMR cannot 
+          reach. Heavy industry — chemical processing, refining, advanced manufacturing — uses 
+          large quantities of medium-pressure steam at 300–400°C. Currently sourced from 
+          natural gas boilers. A collocated nuclear cogeneration unit displaces that gas load 
+          with zero-carbon heat at locked long-term cost. The buyer is an industrial operator 
+          who wants to decarbonize process heat and lock in energy cost — not a utility buying 
+          electrons. This buyer has a different economics model (heat value + carbon credit + 
+          energy security), a higher willingness to pay, and is less sensitive to grid 
+          integration complexity.
+        </p>
+        <div class="market-fit">VARIANT fit: 380°C outlet beats all LWR SMRs &bull; Small unit = collocated siting &bull; Natural U = no enrichment supply risk for industrial buyer &bull; Cogeneration = 2× revenue per unit</div>
+      </div>
+      <div class="market-card fade-up" style="transition-delay:0.2s">
+        <div class="market-badge">Secondary Market</div>
+        <div class="market-title">Data Center Anchor Power</div>
+        <p class="market-body">
+          Hyperscale data centers are building 100–500 MW campuses requiring 24/7 carbon-free 
+          power. They are signing 20-year PPAs and direct reactor purchase agreements. VARIANT 
+          at 65–70 MWe does not serve a hyperscale campus alone, but as part of a multi-unit 
+          deployment or paired with renewables, it provides the dispatchable baseload that 
+          makes an otherwise intermittent portfolio firm. The data center buyer cares about 
+          CFE 24/7 certification and long-term price certainty — both VARIANT strengths. 
+          This market is speculative for first units but is a realistic target for units 5–10.
+        </p>
+        <div class="market-fit">VARIANT fit: 24/7 carbon-free &bull; Long-term price lock &bull; Target: units 5–10, not FOAK</div>
+      </div>
+      <div class="market-card fade-up" style="transition-delay:0.3s">
+        <div class="market-badge">vs. Large Reactor PPA</div>
+        <div class="market-title">Why Not Just Buy a Large Reactor?</div>
+        <p class="market-body">
+          Investors will ask: why deploy a 65 MWe VARIANT when a utility could sign a PPA from 
+          an AP1000 or BWRX-300 at lower $/kWe? The answer is specific to our two target markets: 
+          industrial process heat buyers cannot receive heat from a utility PPA — the heat must 
+          be collocated. Defense buyers need on-site generation, not grid connectivity. Neither 
+          buyer can be served by a large reactor selling electrons at the fence. VARIANT's small 
+          size and high-temperature output is not a limitation — it is the product definition 
+          for these buyers.
+        </p>
+        <div class="market-fit">Differentiation: heat must be collocated &bull; Security requires on-site &bull; Size is a feature, not a bug</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUEL CYCLE -->
+<section id="fuelcycle">
+  <div class="section-label">Fuel Cycle &amp; Waste</div>
+  <h2 class="section-title">Simple in, simple<br><em>out</em></h2>
+  <div class="two-col fade-up">
+    <div class="prose">
+      <p>
+        VARIANT's FOAK and demo operate on a once-through natural uranium fuel cycle. 
+        This is the simplest possible fuel strategy and the one we are designing and 
+        licensing around. No reprocessing intent. No MOX qualification required for 
+        commercial operation. No spent fuel reprocessing assumptions embedded in 
+        the economics.
+      </p>
+      <p>
+        Fuel form: standard UO₂ pellets in CANDU-heritage 37-element bundles. 
+        The same fuel geometry operated commercially for 60 years with a well-characterized 
+        irradiation database. No new fuel qualification program required for natural uranium 
+        operation — only for future fuel types, which are treated as Phase 2 options.
+      </p>
+      <p>
+        Refueling scheme for FOAK: batch mode on an approximately 18-month cycle. 
+        Online refueling capability is designed into the pressure tube architecture from 
+        day one — fuel channel end-fittings are compatible with CANDU-style fueling machines — 
+        but is not deployed on the FOAK. Online refueling is demonstrated on the second 
+        commercial unit. This choice eliminates the single largest licensing complexity 
+        from the first plant.
+      </p>
+      <p>
+        Discharge burnup target: approximately 7–10 GWd/tU (natural uranium, consistent 
+        with CANDU operating experience). Spent fuel is discharged to on-site water storage 
+        and subsequently to standard dry storage casks. The pathway is identical to existing 
+        CANDU spent fuel management practice — no novel waste disposition approach is required 
+        or claimed.
+      </p>
+    </div>
+    <div>
+      <div class="callout-box fade-up" style="transition-delay:0.1s;">
+        <div class="callout-text">
+          On reprocessing: we are not pursuing it. Spent fuel goes to dry storage on the same 
+          regulatory pathway as every operating PHWR. This is not ambiguous.
+        </div>
+        <div class="callout-source">— VARIANT Design Basis, Once-Through Fuel Cycle, Rev. 1</div>
+      </div>
+      <div class="alert-box" style="margin-top:24px;">
+        <div class="alert-label">Fuel Cycle Summary</div>
+        <p><strong>In:</strong> Natural UO₂ pellets, 37-element bundles, no enrichment required.<br>
+        <strong>Out:</strong> Spent fuel to wet storage → dry cask storage, standard PHWR pathway.<br>
+        <strong>Refuel:</strong> Batch, ~18-month cycle for FOAK. Online fueling designed-in for NOAK.<br>
+        <strong>Burnup:</strong> ~7–10 GWd/tU.<br>
+        <strong>Reprocessing:</strong> Not in scope for commercial program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SRS FEATURE -->
+<div class="srs-feature" id="srs">
+  <div class="srs-inner">
+    <div>
+      <div class="srs-label">Savannah River Site</div>
+      <h2 class="srs-title">The asset no other<br>SMR developer<br><em>has</em></h2>
+      <div class="srs-text">
+        <p>
+          DOE's Savannah River Site holds the largest government-owned heavy water inventory 
+          in the Western hemisphere — currently in storage, with no active commercial use. 
+          SRNL has an active program to detritiate and repurpose this inventory. 
+          We have active conversations with SRS and SRNL underway. This is a funded, 
+          institutional relationship, not a speculative partnership.
+        </p>
+        <p>
+          No other SMR developer can enter an NRC pre-application meeting and state that their 
+          primary moderator inventory is government-owned, physically located at the proposed 
+          demo site, and available for transfer. This is a concrete cost and schedule advantage 
+          with no parallel in the SMR field.
+        </p>
+      </div>
+      <div class="srs-number-callout">
+        <div class="srs-big-num">~1,700</div>
+        <div class="srs-big-label">Metric Tonnes D₂O at SRS</div>
+        <div class="srs-big-note">
+          VARIANT demo requires 50–100 tonnes. SRS inventory is tritiated 
+          (range: ~2–10 Ci/kg depending on storage tank). Detritiation to 
+          &lt;1 Ci/kg operational target is achievable via existing SRNL 
+          vapor-phase catalytic exchange process. Estimated detritiation cost: 
+          $3–8M for demo inventory — a fraction of market purchase price (~$50M equivalent).
+        </div>
+      </div>
+
+      <!-- TRITIUM BOX -->
+      <div class="tritium-box">
+        <div class="tritium-box-label">Tritium &amp; D₂O Handling — Operational Concept</div>
+        <div class="tritium-row">
+          <div class="tritium-item">
+            <div class="tritium-item-label">Source Term (Why Lower Than PHWR)</div>
+            <div class="tritium-item-value">Helium coolant is not D₂O — tritium produced in moderator stays in the calandria system, not the primary heat transport loop. This eliminates the major tritium permeation pathway that governs CANDU primary circuit dose. Tritium inventory is contained in a single, cooled, low-pressure D₂O system.</div>
+          </div>
+          <div class="tritium-item">
+            <div class="tritium-item-label">Production Rate (Demo)</div>
+            <div class="tritium-item-value">At 10–20 MWth, tritium production is approximately 1–3 grams/year — consistent with CANDU scaling (~57g/year at 200 MWth). Not a significant commercial quantity. Operational monitoring via D₂O sampling on a defined schedule; cover gas tritium monitor continuous.</div>
+          </div>
+          <div class="tritium-item" style="margin-top:16px;">
+            <div class="tritium-item-label">Detritiation Approach</div>
+            <div class="tritium-item-value">SRS SRNL operates existing detritiation capability. Demo inventory detritiated prior to transfer. Commercial units: dedicated small-scale Combined Electrolysis and Catalytic Exchange (CECE) unit, proven technology deployed at CANDU stations. Budget: $2–4M capital, ~$1M/year operating.</div>
+          </div>
+          <div class="tritium-item" style="margin-top:16px;">
+            <div class="tritium-item-label">Regulatory Handling</div>
+            <div class="tritium-item-value">Tritium effluent from D₂O systems managed under NRC license condition. Worker dose managed via air monitoring, respiratory protection for D₂O maintenance, and established ALARA programs from CANDU practice. No novel regulatory pathway required — DOE SRS has tritium license experience.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="srs-advantages">
+      <div class="srs-adv">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">D₂O Cost: $3–8M vs. ~$50M Market</div>
+          <div class="srs-adv-body">Access to tritiated SRS inventory via DOE transfer or lease, plus SRNL detritiation services, reduces moderator capital cost by 85–90% versus open-market D₂O purchase. Quantified, not estimated.</div>
+        </div>
+      </div>
+      <div class="srs-adv">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">Existing HW Infrastructure</div>
+          <div class="srs-adv-body">SRS operated production-scale heavy water reactors and the HWCTR. Piping systems, tritium protocols, D₂O handling procedures, and institutional expertise are embedded at SRNL. We are building on infrastructure, not creating it.</div>
+        </div>
+      </div>
+      <div class="srs-adv">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">DOE Site = 12–18 Month Schedule Compression</div>
+          <div class="srs-adv-body">Non-nuclear infrastructure construction proceeds under DOE authority during NRC research reactor license review. Private greenfield sites cannot exploit this parallelism. This compression is real and schedule-critical at our capital constraint.</div>
+        </div>
+      </div>
+      <div class="srs-adv">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">SRNL as Technical Co-Author</div>
+          <div class="srs-adv-body">SRNL named as technical collaborator on the NRC safety analysis changes the licensing dynamic. NRC staff reviewing an SRNL-co-authored document approaches it differently than a startup's self-authored submission. Institutional credibility is not cosmetic.</div>
+        </div>
+      </div>
+      <div class="srs-adv">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">DOE Funding Eligibility: $20–40M Target</div>
+          <div class="srs-adv-body">GAIN voucher (up to $2M, SRNL-eligible), Office of Nuclear Energy cost-share agreements, and ARPA-E mechanisms open specifically upon placement on a DOE site with active national lab partnership. None available to private-site developers. Applications filed concurrent with SRS MOU.</div>
+        </div>
+      </div>
+      <div class="srs-adv" style="border-bottom:none;">
+        <div class="srs-adv-dot"></div>
+        <div>
+          <div class="srs-adv-title">What DOE Gets</div>
+          <div class="srs-adv-body">DOE benefits materially: a legitimate commercial disposition pathway for a storage liability (tritiated D₂O), a private-funded advanced reactor demonstration on a federal site, and a non-power research reactor that generates applied HW technology data for the national laboratory program. The partnership is symmetric, not one-sided.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO PLAN -->
+<section id="demo">
+  <div class="section-label">Demo Program</div>
+  <h2 class="section-title">What the demo<br><em>de-risks</em></h2>
+  <div class="two-col-wide">
+    <div class="prose fade-up">
+      <p>
+        The demo is a 10–20 MWth non-power research reactor at SRS, licensed under 10 CFR 
+        Part 50 Subpart D — the same framework as the Georgia Tech GTRR and the currently 
+        operating NIST NBSR. It does not generate commercial electricity. Its sole purpose 
+        is to produce a validated technical data package that supports the commercial FOAK 
+        license application and the subsequent $800M–1B financing round.
+      </p>
+      <p>
+        RELLIS (Texas A&M) runs in parallel as the non-nuclear test platform. An 
+        electrically-heated He/D₂O channel mockup — no fissile material, no NRC permit — 
+        generates thermal-hydraulic correlation data that feeds into the SRS license 
+        application. RELLIS hardware running in 18–24 months is our most important 
+        near-term investor-visible milestone.
+      </p>
+      <p>
+        The demo retires risk in investor terms: it converts technical uncertainty into 
+        measured data. Each item below corresponds to a specific uncertainty that today 
+        requires assumptions and that, after the demo, becomes a measurement.
+      </p>
+    </div>
+    <div class="strategy-steps fade-up" style="transition-delay:0.1s;">
+      <div class="step" style="padding-top:0;">
+        <div class="step-num">R1</div>
+        <div>
+          <div class="step-title">Neutronics Validation</div>
+          <div class="step-body">Low-power physics measurements (critical approach, flux mapping, reactivity coefficient measurements) validate our neutronics codes against actual D₂O/helium-channel core geometry. Bias and uncertainty quantification feeds directly into the commercial FOAK license safety analysis. Without measured data, regulators require large conservative margins. With it, margins are defensible and tighter.</div>
+          <div class="step-meta">Retires: Code validation uncertainty for criticality safety analysis</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">R2</div>
+        <div>
+          <div class="step-title">Thermal-Hydraulic Correlations</div>
+          <div class="step-body">Helium channel flow, heat transfer coefficients, and pressure drop in the actual fuel channel geometry at operating conditions. RELLIS provides first-cut data; the demo provides nuclear-environment confirmation. The D₂O/helium interface behavior — particularly any cross-contamination or permeation under operating conditions — is measured and bounded. This data does not exist in published literature for this specific configuration.</div>
+          <div class="step-meta">Retires: TH correlation uncertainty and interface behavior assumptions</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">R3</div>
+        <div>
+          <div class="step-title">Passive Decay Heat Removal Validation</div>
+          <div class="step-body">Controlled scram followed by disconnection of active cooling. Temperature coast-down is measured and compared to pre-test predictions. Time to reach any defined temperature limit is established experimentally. This is the single most important safety data point for the commercial license application and the most fundable result the demo produces.</div>
+          <div class="step-meta">Retires: Passive safety claim uncertainty — converts calculation to measurement</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">R4</div>
+        <div>
+          <div class="step-title">Fuel Channel Mechanical Behavior</div>
+          <div class="step-body">Pressure tube performance under helium coolant at operating temperature: creep rate, dimensional stability, end-fitting helium leak rate, vibration characteristics. Even 6–12 months of irradiation provides the FOAK license application with measured data on the most novel mechanical component in the design.</div>
+          <div class="step-meta">Retires: Pressure tube qualification uncertainty at VARIANT operating conditions</div>
+        </div>
+      </div>
+      <div class="step" style="border-bottom:none;">
+        <div class="step-num">R5</div>
+        <div>
+          <div class="step-title">Operations &amp; Instrumentation Behavior</div>
+          <div class="step-body">Startup, load change, and shutdown procedures against actual plant response. Instrumentation calibration and drift behavior in the radiation environment. Abnormal transient response vs. simulation predictions. Human factors data for the commercial FOAK operating procedures and training program basis.</div>
+          <div class="step-meta">Retires: Operational procedure uncertainty and instrumentation qualification gaps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="timeline-section" id="timeline">
+  <div class="timeline-inner">
+    <div class="section-label">Development Roadmap</div>
+    <h2 class="section-title">First criticality<br>in <em>five years</em></h2>
+    <div class="timeline">
+      <div class="timeline-item fade-up">
+        <div class="timeline-date">
+          <div class="tl-period">Now → Month 6</div>
+          <div class="tl-label">Foundation</div>
+        </div>
+        <div class="timeline-content">
+          <div class="tl-title">SRS MOU + NRC Pre-Application + GAIN Filing</div>
+          <div class="tl-body">Sign binding SRS MOU specifying D₂O quantity, tritium concentration, detritiation cost-share, site designation, and SRNL collaboration scope. File GAIN voucher application. Request first NRC pre-application meeting framed as "non-power HW research reactor — GTRR/NBSR precedent basis, 10 CFR Part 50 Subpart D." Freeze design parameters permanently: 200 MWth commercial, 10–20 MWth demo, 380°C He outlet, natural UO₂, batch refuel, shell-and-tube steam generator, Zr-2.5Nb pressure tubes.</div>
+          <div class="tl-tags">
+            <span class="tl-tag hot">Critical Path Item</span>
+            <span class="tl-tag">SRS MOU Target: 90 Days</span>
+            <span class="tl-tag blue">Design Freeze</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-date">
+          <div class="tl-period">Month 6–18</div>
+          <div class="tl-label">Design &amp; Test</div>
+        </div>
+        <div class="timeline-content">
+          <div class="tl-title">RELLIS Test Loop Construction + PSAR Draft</div>
+          <div class="tl-body">RELLIS electrically-heated He/D₂O channel mockup under construction — standard industrial permitting, no NRC involvement. 3–4 NRC pre-application meetings conducted; topical reports on key safety topics submitted to NRC for staff review. Preliminary Safety Analysis Report (PSAR) draft circulated to SRNL for technical review. DOE Office of Nuclear Energy cost-share application submitted with SRS MOU as primary qualification evidence.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">RELLIS Construction</span>
+            <span class="tl-tag blue">PSAR Draft</span>
+            <span class="tl-tag">DOE Cost-Share Filing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-date">
+          <div class="tl-period">Month 18–30</div>
+          <div class="tl-label">Data &amp; Filing</div>
+        </div>
+        <div class="timeline-content">
+          <div class="tl-title">RELLIS Data + NRC License Application Submitted</div>
+          <div class="tl-body">RELLIS test loop operational — thermal-hydraulic channel data flowing, validating design codes. NRC research reactor license application submitted with SRNL as technical co-author on safety analysis. SRS site preparation (civil work, utilities) begins under DOE construction authority in parallel. DOE cost-share agreement expected to close in this window, reducing private capital requirement by $20–40M.</div>
+          <div class="tl-tags">
+            <span class="tl-tag hot">NRC License Application Filed</span>
+            <span class="tl-tag">RELLIS Data Milestone</span>
+            <span class="tl-tag blue">DOE Cost-Share Close</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-date">
+          <div class="tl-period">Month 30–48</div>
+          <div class="tl-label">Build</div>
+        </div>
+        <div class="timeline-content">
+          <div class="tl-title">NRC Review Period + Core Fabrication</div>
+          <div class="tl-body">NRC review (18–24 months typical for research reactors under Subpart D). Expect Requests for Additional Information (RAIs) — these are normal, not a failure signal. Budget and schedule include two RAI response cycles. Parallel: pressure tube fabrication, calandria assembly, helium circulator procurement, shell-and-tube steam generator build. D₂O detritiation at SRNL and transfer to SRS demo site. Schedule risk: RAI volume could extend this phase by 3–6 months — contingency is budgeted.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">NRC Review</span>
+            <span class="tl-tag">Core Fabrication</span>
+            <span class="tl-tag blue">D₂O Transfer</span>
+            <span class="tl-tag hot">RAI Contingency Budgeted</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-up">
+        <div class="timeline-date">
+          <div class="tl-period">Month 48–60</div>
+          <div class="tl-label">First Light</div>
+        </div>
+        <div class="timeline-content">
+          <div class="tl-title">First Criticality → Risk Retirement Data Package</div>
+          <div class="tl-body">Low-power startup. Critical approach measurements, flux mapping, reactivity coefficient tests. Power ascension to 10–20 MWth. Passive decay heat removal test (Risk R3). Minimum 6 months of continuous operation to accumulate fuel channel mechanical data (Risk R4). Full data package assembled for commercial FOAK license application. This package is the asset that raises the $800M–1B Series B round in 2031.</div>
+          <div class="tl-tags">
+            <span class="tl-tag hot">First Criticality</span>
+            <span class="tl-tag hot">Series B Milestone</span>
+            <span class="tl-tag">R1–R5 Data Package</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RISKS -->
+<div class="risk-section" id="risks">
+  <div class="risk-inner">
+    <div class="section-label">Risk Register</div>
+    <h2 class="section-title">Killer risks and<br><em>how we retire them</em></h2>
+    <div class="prose fade-up" style="max-width:680px; margin-bottom: 56px;">
+      <p>
+        The following are the risks that, if unaddressed, would justify not investing. 
+        We address them directly. Investors will ask these questions; the answers are here.
+      </p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-row-header">
+        <div class="risk-col-label">Risk</div>
+        <div class="risk-col-label">What Could Happen</div>
+        <div class="risk-col-label">Retirement Mechanism</div>
+      </div>
+
+      <div class="risk-row fade-up">
+        <div>
+          <div class="risk-name">D₂O / Tritium Handling</div>
+          <div class="risk-severity sev-med"><span class="sev-dot"></span>Moderate</div>
+        </div>
+        <div class="risk-desc">SRS D₂O tritium concentration higher than expected; detritiation cost and schedule overrun; worker dose events; NRC scrutiny of tritium effluent management during licensing.</div>
+        <div class="risk-retire">SRNL detritiation capability is active and characterized; cost estimate ($3–8M) based on known process. Operational tritium managed via CECE system (proven CANDU technology). NRC tritium license conditions are standard for HW reactors — no novel regulatory pathway. Cover gas monitoring continuous. Budget includes 30% contingency on detritiation cost.</div>
+      </div>
+
+      <div class="risk-row fade-up">
+        <div>
+          <div class="risk-name">NRC Licensing Novelty</div>
+          <div class="risk-severity sev-high"><span class="sev-dot"></span>High (managed)</div>
+        </div>
+        <div class="risk-desc">NRC staff unfamiliar with helium + pressure tube architecture under Part 50 Subpart D; protracted RAI cycles; requirement to produce modern analysis from scratch despite historical precedent; licensing timeline extends 2–3 years beyond plan.</div>
+        <div class="risk-retire">Three mitigations: (1) SRNL co-authorship on safety analysis — SRNL has current NRC relationships. (2) Pre-application topical reports submitted early on highest-novelty topics (helium channel TH, HW moderator safety function) so NRC staff can develop positions before formal application. (3) 6-month RAI contingency built into timeline and budget. We acknowledge this as first-of-kind under today's NRC expectations — precedent reduces risk, does not eliminate it.</div>
+      </div>
+
+      <div class="risk-row fade-up">
+        <div>
+          <div class="risk-name">Pressure Tube Performance</div>
+          <div class="risk-severity sev-med"><span class="sev-dot"></span>Moderate</div>
+        </div>
+        <div class="risk-desc">Zr-2.5Nb pressure tubes at 380°C helium service perform outside predictions: unexpected creep rate, dimensional instability, or helium leak at end-fittings. Requires mid-demo design change, delays FOAK commercial timeline.</div>
+        <div class="risk-retire">Dual-tube architecture keeps outer tube temperature within established CANDU qualification bounds. Inner tube sees hotter conditions — RELLIS test loop provides non-nuclear mechanical data before demo construction. Demo itself is the definitive qualification test; 6 months of operating data is the retirement mechanism. End-fitting design is a specific engineering deliverable with conservative helium leak specification documented before fabrication.</div>
+      </div>
+
+      <div class="risk-row fade-up">
+        <div>
+          <div class="risk-name">Supply Chain — First Unit</div>
+          <div class="risk-severity sev-med"><span class="sev-dot"></span>Moderate</div>
+        </div>
+        <div class="risk-desc">Qualified suppliers for nuclear-grade pressure tubes, calandria fabrication, helium circulators, and natural uranium fuel bundles may not exist in the U.S. or have long lead times. Single-source risk on critical components.</div>
+        <div class="risk-retire">Pressure tube alloy suppliers (ATI, Westinghouse) already produce Zr-2.5Nb for CANDU programs. CANDU fuel fabrication (natural UO₂ bundles) has existing qualified supply via Canadian and Indian programs; U.S. pathway via GNF or BWX. Helium circulators from industrial gas reactor supply base (Howden, Sulzer). Supply chain mapping is a funded Phase 1 deliverable — not an assumption.</div>
+      </div>
+
+      <div class="risk-row fade-up">
+        <div>
+          <div class="risk-name">Schedule — Demo to Fleet</div>
+          <div class="risk-severity sev-high"><span class="sev-dot"></span>High (acknowledged)</div>
+        </div>
+        <div class="risk-desc">"Demo that never becomes a fleet" — demo succeeds technically but commercial FOAK financing cannot close, no OEM commits to standardized design, or market window is taken by LWR SMRs before VARIANT reaches commercial scale.</div>
+        <div class="risk-retire">Three structural mitigations: (1) Primary market buyers (DOD, industrial process heat) are not served by LWR SMRs — market window does not close. (2) Demo data package is the direct input to FOAK financing, not a separate track. (3) Design freeze at demo phase — commercial unit is identical to demo at scale, not a new design. OEM pathway: licensing and commercial design rights structured for technology transfer to a Tier-1 nuclear manufacturer at Series B.</div>
+      </div>
+
+      <div class="risk-row fade-up" style="border-bottom:none;">
+        <div>
+          <div class="risk-name">SRS MOU Delays</div>
+          <div class="risk-severity sev-high"><span class="sev-dot"></span>High (near-term)</div>
+        </div>
+        <div class="risk-desc">SRS MOU takes longer than 90 days to execute; D₂O transfer terms are more restrictive than expected; SRNL collaboration scope is limited by internal DOE prioritization. Delays entire critical path.</div>
+        <div class="risk-retire">Active conversations are ongoing. 90-day target is aggressive but informed by current engagement status. Mitigation: parallel pursuit of RELLIS as fallback demo site (longer timeline, higher D₂O procurement cost, no DOE construction authority advantage) with RELLIS test loop proceeding regardless. SRS MOU slip of 6 months delays criticality by approximately 6 months — not fatal, but a real cost.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE ARE NOT -->
+<div class="not-section" id="notnot">
+  <div class="not-inner">
+    <div>
+      <div class="not-label">Discipline</div>
+      <h2 class="not-title">What we<br>are <em>not</em></h2>
+      <div class="not-text">
+        <p>
+          Investors value this section more than any other. It signals that the team 
+          understands the design's limits and has not built projections on capabilities 
+          that don't exist. The following are explicit non-claims.
+        </p>
+        <p>
+          Everything in this document is bounded by what the current design basis 
+          supports. Future phases may extend these bounds — but no financial projection 
+          in this document depends on capabilities beyond those stated here.
+        </p>
+      </div>
+    </div>
+    <ul class="not-list">
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming exotic outlet temperatures.</strong> 380°C is conservative by design. We are not chasing 500°C+ for FOAK. Higher temperature operation is a future phase requiring additional pressure tube material qualification and is not in the commercial FOAK design basis.</div>
+      </li>
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming zero tritium.</strong> Heavy-water reactors produce tritium. We manage it via established CANDU-derived methods. We have a specific detritiation concept, a cost range, and a regulatory approach. "Managed" is not the same as "absent."</div>
+      </li>
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming instant NRC approval.</strong> Precedent reduces novelty risk; it does not eliminate it. We have budgeted for RAI cycles, pre-application topical reports, and a realistic 18–24 month NRC review period. We treat this as first-of-kind under modern review expectations.</div>
+      </li>
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming online refueling at FOAK.</strong> The capability is designed in. It is not deployed until the second commercial unit. FOAK is batch-refueled on ~18-month cycles.</div>
+      </li>
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming PCHE heat exchangers on the critical path.</strong> Shell-and-tube for FOAK and demo. PCHE is a NOAK efficiency upgrade with no bearing on demo or FOAK economics.</div>
+      </li>
+      <li class="not-item">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not claiming to eliminate nuclear waste.</strong> Once-through natural uranium fuel cycle. Spent fuel to standard dry storage. No reprocessing. No MOX. No actinide burning in the commercial program. These are Phase 2 options, not baseline claims.</div>
+      </li>
+      <li class="not-item" style="border-bottom:none;">
+        <div class="not-x">×</div>
+        <div class="not-item-text"><strong>Not the only natural-uranium reactor concept in existence.</strong> CANDU programs, AHWR variants, and some SMR-adjacent concepts claim natural or near-natural uranium operation. VARIANT's differentiation is the specific combination: helium cooling, US licensing basis, DOE-site demo, conservative temperature for near-term deployment. The claim is not uniqueness of physics — it is specificity of execution.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- FINANCIALS -->
+<section id="financials">
+  <div class="section-label">Financial Picture</div>
+  <h2 class="section-title">The demo budget<br><em>&amp; what it buys</em></h2>
+  <div class="two-col fade-up">
+    <div>
+      <table class="fin-table">
+        <tr><td>RELLIS Non-Nuclear Test Loop</td><td>$15–25M</td></tr>
+        <tr><td>SRS Site Preparation &amp; Infrastructure</td><td>$10–20M</td></tr>
+        <tr><td>Reactor Core Fabrication (10–20 MWth)</td><td>$15–25M</td></tr>
+        <tr><td>D₂O Detritiation &amp; Transfer (SRS Inventory)</td><td>$3–8M</td></tr>
+        <tr><td>Helium System (Circulator, Piping, S&amp;T HX)</td><td>$8–12M</td></tr>
+        <tr><td>Instrumentation, Controls &amp; Safety Systems</td><td>$10–15M</td></tr>
+        <tr><td>NRC Licensing (Legal, Safety Analysis, RAIs)</td><td>$8–12M</td></tr>
+        <tr><td>Contingency (15–20%, includes RAI cycles)</td><td>$10–15M</td></tr>
+        <tr class="total"><td>Total Private Capital Required</td><td>$79–132M</td></tr>
+      </table>
+      <p style="margin-top:20px; font-size:13px; color:var(--muted); line-height:1.75; font-weight:400;">
+        DOE cost-share (GAIN + Office of Nuclear Energy) targeted at $20–40M, 
+        reducing private capital requirement to <strong style="color:var(--ink);">$60–80M effective.</strong> 
+        SRS MOU is primary qualification evidence for all government funding mechanisms. 
+        Budget does not include commercial FOAK capital — that is the Series B.
+      </p>
+    </div>
+    <div class="scenario-cards">
+      <div class="scenario-card">
+        <div class="sc-label">Conservative — Demo + IP Value</div>
+        <div class="sc-value">$1–2B</div>
+        <div class="sc-logic">~10× Series A on IP / license value</div>
+        <div class="sc-desc">Demo succeeds; commercial fleet does not materialize at scale. Technology becomes a licensable asset. Comparable to how NuScale's design certification created acquirable IP independent of full deployment. Acquisition by major nuclear OEM is the exit.</div>
+      </div>
+      <div class="scenario-card featured">
+        <div class="sc-label">Base Case — First Commercial Fleet</div>
+        <div class="sc-value">$3–6B</div>
+        <div class="sc-logic">15 units × ~$400M NPV/unit × ~50% vendor capture × 10× EBITDA</div>
+        <div class="sc-desc">15 commercial units by 2045. Revenue model: technology licensing + proprietary component supply + O&M services = ~$40–60M/year per unit in vendor revenue at fleet scale. At 25% EBITDA margin, 10× multiple, plus residual IP: $3–6B enterprise value by late 2030s. Requires FOAK operational by 2036.</div>
+      </div>
+      <div class="scenario-card">
+        <div class="sc-label">Upside — Enrichment Disruption</div>
+        <div class="sc-value">$15–30B+</div>
+        <div class="sc-logic">40+ units + pricing power if enrichment supply is constrained</div>
+        <div class="sc-desc">Geopolitical enrichment disruption creates demand surge for natural-uranium reactor designs. VARIANT is the only licensed Western design in that category. Pricing power increases significantly; strategic investors (sovereign funds, DOD) pay premium for assured access. Not modeled as base case — treated as real option on a tail risk that may not be tail at all.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ASK -->
+<div class="ask-section" id="ask">
+  <div class="ask-inner">
+    <div>
+      <div class="ask-label">The Ask</div>
+      <h2 class="ask-title">A single,<br>fundable<br><em>proof.</em></h2>
+      <div class="ask-amount">$80M</div>
+      <div class="ask-amount-label">Series A — Non-Power Demo + Commercial Licensing</div>
+      <div class="ask-text">
+        <p>
+          We are building a 10–20 MWth non-power research reactor at Savannah River Site — 
+          on a DOE facility, using government-owned heavy water at a fraction of market cost, 
+          with SRNL as our technical partner. The NRC has licensed two heavy-water reactors 
+          in the United States. We are not asking anyone to accept new physics.
+        </p>
+        <p>
+          This capital funds the risk retirement program that converts our SRS partnership 
+          and RELLIS site position into a validated, licensed design — and that validated 
+          design raises the $800M–1B commercial FOAK round in 2031. The demo is not a 
+          cost center. It is the asset that makes every subsequent dollar of capital 
+          an order of magnitude cheaper to raise.
+        </p>
+        <p>
+          DOE cost-share reduces effective private capital to $60–80M. We are targeting 
+          three investor types simultaneously: infrastructure funds who see a long-duration 
+          yield asset; strategic industrials who see a fuel-secure process heat platform; 
+          and government-adjacent investors who see a DOD/DOE supply chain opportunity. 
+          The demo structure serves all three theses.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:16px;">Use of Funds</div>
+      <div class="use-of-funds">
+        <div class="fund-row"><div class="fund-name">RELLIS Non-Nuclear Test Loop</div><div class="fund-amount">$20M</div></div>
+        <div class="fund-bar-wrap"><div class="fund-bar" data-width="25" style="width:0%"></div></div>
+        <div class="fund-row"><div class="fund-name">SRS Site &amp; Core Fabrication</div><div class="fund-amount">$30M</div></div>
+        <div class="fund-bar-wrap"><div class="fund-bar" data-width="37" style="width:0%"></div></div>
+        <div class="fund-row"><div class="fund-name">D₂O, Helium System &amp; Safety</div><div class="fund-amount">$15M</div></div>
+        <div class="fund-bar-wrap"><div class="fund-bar" data-width="19" style="width:0%"></div></div>
+        <div class="fund-row"><div class="fund-name">NRC Licensing &amp; Legal</div><div class="fund-amount">$10M</div></div>
+        <div class="fund-bar-wrap"><div class="fund-bar" data-width="12" style="width:0%"></div></div>
+        <div class="fund-row"><div class="fund-name">Contingency (RAI cycles, slippage)</div><div class="fund-amount">$5M</div></div>
+        <div class="fund-bar-wrap"><div class="fund-bar" data-width="6" style="width:0%"></div></div>
+      </div>
+
+      <div class="milestone-list">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:4px;">Investor Milestones</div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 3:</strong> SRS MOU executed — D₂O access, site, SRNL scope confirmed and binding</div>
+        </div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 6:</strong> First NRC pre-application meeting completed; NRC staff initial read on licensing basis confirmed</div>
+        </div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 18:</strong> RELLIS test loop operational; first thermal-hydraulic data package released</div>
+        </div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 24:</strong> NRC research reactor license application formally submitted</div>
+        </div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 36:</strong> DOE cost-share agreement closed; effective private capital requirement confirmed</div>
+        </div>
+        <div class="milestone-item">
+          <div class="m-dot"></div>
+          <div class="m-text"><strong>Month 54:</strong> First criticality at SRS; passive safety test completed; R1–R5 data package available for Series B financing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-mark">VARIANT</div>
+    <div class="footer-copy">Confidential — For Investor Use Only — 2025</div>
+    <div class="footer-disclaimer">
+      Forward-looking statements reflect current design basis and management estimates. 
+      All technical specifications are pre-conceptual and subject to revision. 
+      Regulatory timelines are estimates based on comparable precedents. 
+      Not an offer of securities.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up, .step, .timeline-item, .stat-item, .risk-row').forEach(el => {
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.stat-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.12}s`;
+  });
+
+  const askObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.fund-bar').forEach(bar => {
+          const w = bar.dataset.width;
+          setTimeout(() => { bar.style.width = w + '%'; }, 400);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const askSection = document.querySelector('.ask-section');
+  if (askSection) askObserver.observe(askSection);
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('[id]').forEach(section => {
+      if (window.scrollY >= section.offsetTop - 120) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current ? 'var(--ink)' : 'var(--muted)';
+    });
+  });
+</script>
+</body>
+</html>
